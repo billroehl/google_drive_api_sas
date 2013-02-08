@@ -7,8 +7,8 @@ Our organization has been utilizing Google Drive (previously Google Docs) to kee
 
 REFERENCES 
   
-  • Ted Clay. (2006). Tight Looping With Macro Arrays. 
-    http://www2.sas.com/proceedings/sugi31/040-31.pdf 
+  • Ted Clay. (2006). Tight Looping With Macro Arrays.
+    http://www2.sas.com/proceedings/sugi31/040-31.pdf
     http://www.sascommunity.org/mwiki/images/e/ec/Clay-TightLooping-macros.zip
   
   •	Google Inc. (2012). Google Drive List/Spreadsheets APIs v3.0. 
@@ -16,13 +16,13 @@ REFERENCES
   
   • Dirk Paehl. (2009). HTML Tidy for Win32. 
     http://www.paehl.com/open_source/?HTML_Tidy_for_Windows
-
+    
 CONTACT INFORMATION
 
-Bill Roehl
-11150 Santa Monica Blvd
-Los Angeles, CA  90025
-
-broehl@marketshare.com / @garciasn / http://www.linkedin.com/in/billroehl 
+  Bill Roehl
+  11150 Santa Monica Blvd
+  Los Angeles, CA  90025
+  broehl@marketshare.com / @garciasn / http://www.linkedin.com/in/billroehl 
 
 Copyright (c) 2013 MarketShare Partners, LLC. All rights reserved
+
