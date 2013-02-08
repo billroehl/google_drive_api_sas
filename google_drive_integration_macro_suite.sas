@@ -255,11 +255,12 @@ Parameters: URL - Google Docs URL of item to download
 	%array(DELIMSHEETS, values=&XLSNOSPACES.,delim = '|')
 	%array(SHEETS, values=&XLSSPACES.,delim = '|')
 	%do_over(DELIMSHEETS SHEETS, DELIM=|, phrase=proc import datafile="&DRIVE.:\&TEMP.\OUT.XLS" 
-															 out=?DELIMSHEETS
-															 dbms=excel 
-															 replace;
-															 range="?SHEETS"; 
-												 run;);
+							out=?DELIMSHEETS
+							dbms=excel 
+							replace;
+							range="?SHEETS"; 
+							run;
+	);
 
 	options noxwait;
 	x "del &DRIVE.:\&TEMP.\OUT.XLS";
@@ -581,12 +582,12 @@ Parameters: SPREADSHEET_TITLE - Title of spreadsheet
 %macro gdoc_createWS(spreadsheet_title, new_sheet_title, ds, ds_lib);
 	/* We need to remove special characters to do the upload and then replace them with the original column names later */
 	data VCOLUMN; set SASHELP.VCOLUMN(where=(LIBNAME=UPCASE(resolve('&DS_LIB.')) AND MEMNAME=UPCASE(resolve('&DS.')))); NAME_LCASE = compress(lowcase(NAME),',<>?:;"{}[]|\~`!@#$%^&*()_-+=/*.'); run;
-		%array(col_names, data=VCOLUMN, var=NAME_LCASE);
+	%array(col_names, data=VCOLUMN, var=NAME_LCASE);
 	data VCOLUMN(where=(UPCASE(NAME_LCASE) ne NAME)); set SASHELP.VCOLUMN(where=(LIBNAME=UPCASE(resolve('&DS_LIB.')) AND MEMNAME=UPCASE(resolve('&DS.')))); NAME_LCASE = compress(lowcase(NAME),',<>?:;"{}[]|\~`!@#$%^&*()_-+=/*.'); run;
-		%array(rename_cols_to, data=VCOLUMN, var=NAME_LCASE);
-		%array(rename_cols_from, data=VCOLUMN, var=NAME);
+	%array(rename_cols_to, data=VCOLUMN, var=NAME_LCASE);
+	%array(rename_cols_from, data=VCOLUMN, var=NAME);
 	data VCOLUMN; set SASHELP.VCOLUMN(where=(LIBNAME=UPCASE(resolve('&DS_LIB.')) AND MEMNAME=UPCASE(resolve('&DS.')))); run;
-		%array(orig_col_names, data=VCOLUMN, var=NAME);
+	%array(orig_col_names, data=VCOLUMN, var=NAME);
 	proc datasets library=work nodetails nolist; delete VCOLUMN; run; quit;
 	data MODIFIED_ORIG_DS; set &DS_LIB..&DS.; run;
 	proc datasets library=WORK nodetails nolist; modify MODIFIED_ORIG_DS; %do_over(rename_cols_from rename_cols_to, phrase=rename ?rename_cols_from = ?rename_cols_to;); run; quit;
@@ -623,7 +624,7 @@ Parameters: SPREADSHEET_TITLE - Title of spreadsheet
 			if _N_ = &i. then do;
 				file "&DRIVE.:\&TEMP.\payload&i..xml";
 				put '<entry xmlns="http://www.w3.org/2005/Atom"';
-				put '		xmlns:gsx="http://schemas.google.com/spreadsheets/2006/extended">';
+				put '	    xmlns:gsx="http://schemas.google.com/spreadsheets/2006/extended">';
 				%do_over(COL_NAMES, phrase=put "	<gsx:?>" ? "</gsx:?>";);
 				put '</entry>'; 
 			end;
